@@ -2,11 +2,31 @@ const { createServer } = require('node:http');
 
 const hostname = '127.0.0.1';
 const port = 3000;
+const express = require('express');
+const mysql = require('mysql2');
+const app = express();
 
 const server = createServer((req, res) => {
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain');
   res.end('Hello World');
+});
+
+// Create connection to MySQL
+const db = mysql.createConnection({
+  host: 'localhost',     // Replace with your MySQL host (usually 'localhost' for local dev)
+  user: 'root',          // Replace with your MySQL user
+  password: '',          // Replace with your MySQL password
+  database: 'library_db' // Replace with your MySQL database name
+});
+
+// Connect to MySQL
+db.connect((err) => {
+  if (err) {
+      console.error('Error connecting to MySQL:', err);
+      return;
+  }
+  console.log('Connected to MySQL');
 });
 
 app.post('/submit-checkin', (req, res) => {
