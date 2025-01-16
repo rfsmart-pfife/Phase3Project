@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RF Library</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body>
+
+<header>
+    <h1>Check-In A Book</h1>
+</header>
+
+<nav>
+    <a href="checkOut.html">Check-Out</a>
+    <a href="library.html">What's Available</a>
+    <a href="index.html">Home</a>
+</nav>
+
+<div class="container" id="checkin">
+    <h2>Check-In Books</h2>
+    <p>Use the form below to check in books that you've borrowed. If the book is lost, please mark it as lost.</p>
+    
+    <form action="/submit-checkin" method="POST">
+        <!-- Book Name Input -->
+        <label for="bookName">Book Name:</label><br>
+        <input type="text" id="bookName" name="bookName" required><br><br>
+
+        <!-- Person's Name Input -->
+        <label for="personName">Your Name:</label><br>
+        <input type="text" id="personName" name="personName" required><br><br>
+
+        <!-- Lost Book Option (Checkbox) -->
+        <label for="lostBook">Is the book lost?</label>
+        <input type="checkbox" id="lostBook" name="lostBook"><br><br>
+
+        <!-- Submit Button -->
+        <input type="submit" value="Check In">
+    </form>
+</div>
+</div>
+
+<footer>
+    <p>RF Library &copy; 2025</p>
+</footer>
+
+</body>
+</html>

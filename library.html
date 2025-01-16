@@ -10,31 +10,28 @@
 <body>
 
 <header>
-    <h1>Welcome to RF Library</h1>
+    <h1>Library</h1>
 </header>
 
 <nav>
     <a href="checkIn.html">Check-In</a>
     <a href="checkOut.html">Check-Out</a>
-    <a href="library.html">What's Available</a>
+    <a href="index.html">Home</a>
 </nav>
-
-<div class="container" id="checkin">
-    <h2>Check-In Books</h2>
-    <p>Use this page to check in books that you've borrowed.</p>
-    <!-- Check-in form or functionality will go here -->
-</div>
-
-<div class="container" id="checkout">
-    <h2>Check-Out Books</h2>
-    <p>Use this page to check out books from the library.</p>
-    <!-- Check-out form or functionality will go here -->
-</div>
 
 <div class="container" id="available">
     <h2>What's Available</h2>
     <p>Explore the books currently available at the library.</p>
-    <!-- Available books list will go here -->
+
+    <!-- Search Bar -->
+    <input type="text" id="searchBar" onkeyup="searchBooks()" placeholder="Search for books...">
+
+    <!-- Scrollable Book List -->
+    <div id="bookList" style="max-height: 400px; overflow-y: scroll; border: 1px solid black; padding: 10px;">
+        <ul id="availableBooks">
+        <button onclick="fetchBooks()">See Our Books</button>
+        </ul>
+    </div>
 </div>
 
 <footer>
