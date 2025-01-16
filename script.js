@@ -32,3 +32,42 @@ function fetchBooks() {
     })
     .catch(error => console.error('Error fetching books:', error));
 }
+
+ // Function to handle the book check-in and lost report
+ function updateBooks() {
+    // Get form values
+    const bookName = document.getElementById('bookName').value;
+    const personName = document.getElementById('personName').value;
+    const isLost = document.getElementById('isLost').checked;  // Get the checkbox value
+
+    // Create the request body
+    const requestBody = {
+        bookName: bookName,
+        personName: personName,
+        isLost: isLost  // Include the lost status in the request
+    };
+
+    // Send a POST request to the /submit-checkin API
+    fetch('/submit-checkin', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(requestBody)
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Handle the response, e.g., show a success message
+        if (data.success) {
+            alert('Book status updated successfully!');
+        } else {
+            alert('Error updating book status. Please try again.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+
+    // Prevent the default form submission
+    return false;
+}

@@ -23,21 +23,20 @@
     <h2>Check-In Books</h2>
     <p>Use the form below to check in books that you've borrowed. If the book is lost, please mark it as lost.</p>
     
-    <form action="/submit-checkin" method="POST">
-        <!-- Book Name Input -->
+    <form id="checkinForm" onsubmit="return updateBooks()">
+        <!-- Book Name -->
         <label for="bookName">Book Name:</label><br>
         <input type="text" id="bookName" name="bookName" required><br><br>
 
-        <!-- Person's Name Input -->
+        <!-- Person's name-->
         <label for="personName">Your Name:</label><br>
         <input type="text" id="personName" name="personName" required><br><br>
 
-        <!-- Lost Book Option (Checkbox) -->
-        <label for="lostBook">Is the book lost?</label>
-        <input type="checkbox" id="lostBook" name="lostBook"><br><br>
+        <!-- Checkbox to report book as lost -->
+        <input type="checkbox" id="isLost" name="isLost">
+        <label for="isLost">Report this book as lost</label><br><br>
 
-        <!-- Submit Button -->
-        <input type="submit" value="Check In">
+        <input type="submit" value="Submit">
     </form>
 </div>
 </div>
