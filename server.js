@@ -14,10 +14,10 @@ const server = createServer((req, res) => {
 
 // Create connection to MySQL
 const db = mysql.createConnection({
-  host: 'localhost',     // Replace with your MySQL host (usually 'localhost' for local dev)
-  user: 'root',          // Replace with your MySQL user
-  password: '',          // Replace with your MySQL password
-  database: 'library_db' // Replace with your MySQL database name
+  host: 'localhost',
+  user: 'root',
+  password: 'password',
+  database: 'library_db' 
 });
 
 // Connect to MySQL
@@ -30,17 +30,28 @@ db.connect((err) => {
 });
 
 app.post('/submit-checkin', (req, res) => {
-  const { bookName, personName, lostBook } = req.body;
+  const { bookName, personName, isLost } = req.body;
 
-  if (lostBook) {
-      console.log(`The book "${bookName}" was reported lost by ${personName}.`);
-      // Handle lost book logic here (e.g., update database, notify library staff, etc.)
+  // SQL query to update the book status based on whether it was lost
+  let sql;
+
+  if (isLost) {
+      // Mark the book as 'lost'
+      sql = 'UPDATE books SET status = "lost" WHERE title = ?';
   } else {
-      console.log(`${personName} checked in the book "${bookName}".`);
-      // Handle normal check-in logic here (e.g., update database, mark book as returned)
+      // Mark the book as 'available'
+      sql = 'UPDATE books SET status = "available" WHERE title = ?';
   }
 
-  res.send('Check-in submitted successfully.');
+  // Execute the query to update the book status
+  db.query(sql, [bookName], (err, result) => {
+      if (err) {
+          console.error('Error updating book status:', err);
+          res.json({ success: false, message: 'Error updating the book status.' });
+      } else {
+          res.json({ success: true, message: 'Book status updated successfully!' });
+      }
+  });
 });
 
 // API endpoint to fetch all available books
@@ -68,7 +79,6 @@ app.post('/api/books', (req, res) => {
       res.json({ id: this.lastID, title });
   });
 });
-
 
 server.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
