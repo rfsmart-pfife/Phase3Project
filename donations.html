@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RF Library</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body>
+
+<header>
+    <h1>Donate A Book</h1>
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="checkOut.html">Check-Out</a>
+    <a href="library.html">What's Available</a>
+</nav>
+
+<div class="container" id="donate">
+    <h2>Donate a Book</h2>
+    <p>Please fill out the form below to donate a book to the library.</p>
+
+    <!-- Form for book donation -->
+    <form id="donationForm" onsubmit="return donateBook()">
+        <label for="bookName">Book Name:</label><br>
+        <input type="text" id="bookName" name="bookName" required><br><br>
+
+        <label for="author">Author:</label><br>
+        <input type="text" id="author" name="author" required><br><br>
+
+        <label for="firstName">Your First Name:</label><br>
+        <input type="text" id="firstName" name="firstName" required><br><br>
+
+        <label for="lastName">Your Last Name:</label><br>
+        <input type="text" id="lastName" name="lastName" required><br><br>
+
+        <input type="submit" value="Donate Book">
+    </form>
+</div>
+
+<footer>
+    <p>RF Library &copy; 2025</p>
+</footer>
+
+</body>
+</html>

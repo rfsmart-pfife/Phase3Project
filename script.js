@@ -71,3 +71,48 @@ function fetchBooks() {
     // Prevent the default form submission
     return false;
 }
+
+ // Function to handle the book donation
+ function donateBook() {
+    // Get form values
+    const bookName = document.getElementById('bookName').value;
+    const author = document.getElementById('author').value;
+    const firstName = document.getElementById('firstName').value;
+    const lastName = document.getElementById('lastName').value;
+
+    // Get the current date (for the donation date)
+    const donationDate = new Date().toISOString().split('T')[0];  // Format YYYY-MM-DD
+
+    // Create the request body
+    const requestBody = {
+        bookName: bookName,
+        author: author,
+        firstName: firstName,
+        lastName: lastName,
+        donationDate: donationDate
+    };
+
+    // Send a POST request to the /submit-donation API
+    fetch('/submit-donation', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(requestBody)
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Handle the response, e.g., show a success message
+        if (data.success) {
+            alert('Thank you for your donation!');
+        } else {
+            alert('Error donating the book. Please try again.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+
+    // Prevent the default form submission
+    return false;
+}

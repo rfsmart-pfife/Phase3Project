@@ -30,7 +30,7 @@ db.connect((err) => {
 });
 
 app.post('/submit-checkin', (req, res) => {
-  const { bookName, personName, isLost } = req.body;
+  const { bookName, isLost } = req.body;
 
   // SQL query to update the book status based on whether it was lost
   let sql;
@@ -77,6 +77,26 @@ app.post('/api/books', (req, res) => {
           return res.status(500).json({ error: err.message });
       }
       res.json({ id: this.lastID, title });
+  });
+});
+
+app.post('/submit-donation', (req, res) => {
+  const { bookName, author, firstName, lastName, donationDate } = req.body;
+
+  // SQL query to insert the donated book into the books table
+  const sql = 'INSERT INTO books (title, author, status, donatedBy, donationDate) VALUES (?, ?, "available", ?, ?)';
+
+  // Combine first and last name for the donor
+  const donorName = `${firstName} ${lastName}`;
+
+  // Execute the query to insert the new book
+  db.query(sql, [bookName, author, donorName, donationDate], (err, result) => {
+      if (err) {
+          console.error('Error inserting donated book:', err);
+          res.json({ success: false, message: 'Error donating the book.' });
+      } else {
+          res.json({ success: true, message: 'Book donated successfully!' });
+      }
   });
 });
 
