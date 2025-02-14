@@ -17,7 +17,7 @@ function searchBooks() {
 }
 
 function fetchBooks() {
-    fetch('/api/books')  //API endpoint
+    fetch('http://127.0.0.1:3000/books')  //API endpoint
     .then(response => response.json())
     .then(data => {
         let bookList = document.getElementById('availableBooks');
@@ -48,7 +48,7 @@ function fetchBooks() {
     };
 
     // Send a POST request to the /submit-checkin API
-    fetch('/submit-checkin', {
+    fetch('http://127.0.0.1:3000/submit-checkin', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -93,7 +93,7 @@ function fetchBooks() {
     };
 
     // Send a POST request to the /submit-donation API
-    fetch('/submit-donation', {
+    fetch('http://127.0.0.1:3000/submit-donation', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

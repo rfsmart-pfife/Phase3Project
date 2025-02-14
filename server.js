@@ -6,6 +6,7 @@ const express = require('express');
 const mysql = require('mysql2');
 const app = express();
 
+
 const server = createServer((req, res) => {
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain');
@@ -55,7 +56,7 @@ app.post('/submit-checkin', (req, res) => {
 });
 
 // API endpoint to fetch all available books
-app.get('/api/books', (req, res) => {
+app.get('/books', (req, res) => {
   const sql = 'SELECT * FROM books';
   db.all(sql, [], (err, rows) => {
       if (err) {
@@ -65,7 +66,7 @@ app.get('/api/books', (req, res) => {
   });
 });
 
-app.post('/api/books', (req, res) => {
+app.post('/books', (req, res) => {
   const { title } = req.body;
   if (!title) {
       return res.status(400).json({ error: 'Book title is required' });
@@ -103,3 +104,4 @@ app.post('/submit-donation', (req, res) => {
 server.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
+
